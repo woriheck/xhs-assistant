@@ -1,6 +1,15 @@
 """Agent prompts for generator and critic."""
 
-GENERATOR_PROMPT = """You are a 小紅書 (Xiaohongshu) content expert.
+from .validators.xhs_post_validators import (
+    TITLE_MAX_CHARS,
+    BODY_MAX_CHARS,
+    TITLE_OPTIMAL_MIN,
+    TITLE_OPTIMAL_MAX,
+    BODY_OPTIMAL_MIN,
+    BODY_OPTIMAL_MAX,
+)
+
+GENERATOR_PROMPT = f"""You are a 小紅書 (Xiaohongshu) content expert.
 
 Your task is to create an engaging, authentic post based on the provided content.
 
@@ -14,10 +23,10 @@ Your task is to create an engaging, authentic post based on the provided content
 - Formatted for mobile reading (short paragraphs)
 
 CRITICAL SIZE LIMITS (Platform Requirements):
-- Title: MUST be ≤ 64 characters (strict limit)
-- Body: MUST be ≤ 10,000 characters (strict limit)
-- Title optimal: 20-45 characters for best engagement
-- Body optimal: 500-2000 characters for mobile reading"""
+- Title: MUST be ≤ {TITLE_MAX_CHARS} characters (strict limit)
+- Body: MUST be ≤ {BODY_MAX_CHARS} characters (strict limit)
+- Title optimal: {TITLE_OPTIMAL_MIN}-{TITLE_OPTIMAL_MAX} characters for best engagement
+- Body optimal: {BODY_OPTIMAL_MIN}-{BODY_OPTIMAL_MAX} characters for mobile reading"""
 
 
 CRITIC_PROMPT = """You are a 小紅書 content critic and improvement specialist.

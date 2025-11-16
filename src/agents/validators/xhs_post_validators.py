@@ -7,8 +7,8 @@ TITLE_MAX_CHARS = 64
 BODY_MAX_CHARS = 10000
 
 # Optimal ranges for engagement
-TITLE_OPTIMAL_MIN = 20
-TITLE_OPTIMAL_MAX = 45
+TITLE_OPTIMAL_MIN = 10
+TITLE_OPTIMAL_MAX = 20
 BODY_OPTIMAL_MIN = 500
 BODY_OPTIMAL_MAX = 2000
 
@@ -42,18 +42,18 @@ def validate_post(post: XHSPost) -> dict:
         issues.append(f"Title too long: {title_len}/{TITLE_MAX_CHARS} characters")
         suggestions.append(f"Shorten title by {title_len - TITLE_MAX_CHARS} characters")
     elif title_len < TITLE_OPTIMAL_MIN:
-        suggestions.append(f"Title is short ({title_len} chars). Consider 20-45 chars for better engagement")
+        suggestions.append(f"Title is short ({title_len} chars). Consider {TITLE_OPTIMAL_MIN}-{TITLE_OPTIMAL_MAX} chars for better engagement")
     elif title_len > TITLE_OPTIMAL_MAX:
-        suggestions.append(f"Title is long ({title_len} chars). Consider 20-45 chars for better engagement")
+        suggestions.append(f"Title is long ({title_len} chars). Consider {TITLE_OPTIMAL_MIN}-{TITLE_OPTIMAL_MAX} chars for better engagement")
 
     # Check body length
     if body_len > BODY_MAX_CHARS:
         issues.append(f"Body too long: {body_len}/{BODY_MAX_CHARS} characters")
         suggestions.append(f"Reduce body by {body_len - BODY_MAX_CHARS} characters")
     elif body_len < BODY_OPTIMAL_MIN:
-        suggestions.append(f"Body is short ({body_len} chars). Consider 500-2000 chars for better engagement")
+        suggestions.append(f"Body is short ({body_len} chars). Consider {BODY_OPTIMAL_MIN}-{BODY_OPTIMAL_MAX} chars for better engagement")
     elif body_len > BODY_OPTIMAL_MAX:
-        suggestions.append(f"Body is long ({body_len} chars). Consider 500-2000 chars for mobile reading")
+        suggestions.append(f"Body is long ({body_len} chars). Consider {BODY_OPTIMAL_MIN}-{BODY_OPTIMAL_MAX} chars for mobile reading")
 
     # Check for hashtags
     full_post = f"{title}\n{body}"

@@ -23,20 +23,81 @@ This is an AI-powered 小红书 (Xiaohongshu/RedNote) content generator designed
 - [x] Build prompt template for 小紅書 style (GENERATOR_PROMPT & CRITIC_PROMPT)
 - [x] Implement text-to-post conversion (Multi-agent workflow: generator → critic → improve)
 - [x] Add emoji and hashtag generation (Built into prompts)
-- [x] Test with 5-10 sample topics (Tested with context engineering topic successfully)
+- [x] Test with 5-10 sample topics (Tested with RAG topic)
 
 #### Output Formatting (3 hours)
 
 - [x] Structure posts (hook, body, CTA) (Handled by prompts)
-- [ ] Add character count optimization
-- [ ] Save outputs to files
+- [x] Add character count optimization
 - [ ] Create 3 template variations
 
 **Deliverable**: ✓ CLI tool that takes text input and generates 小紅書 posts
 
 ---
 
-## Phase 2: URL Processing (Week 2)
+## Phase 2: Audience Targeting & Tone (Week 4)
+
+**Goal**: Optimize for different professional audiences
+
+### Tasks (10 hours)
+
+#### Audience Profiles (3 hours)
+
+- [ ] Create CTOs/Engineering Directors profile
+- [ ] Create Hiring Managers profile
+- [ ] Create Software Engineers profile
+- [ ] Create Business Leaders profile
+
+#### Tone Adaptation (4 hours)
+
+- [ ] Adjust technical depth per audience
+- [ ] Emphasize different value props
+- [ ] A/B test different approaches
+- [ ] Create tone guidelines document
+
+#### Template Library (3 hours)
+
+- [ ] Build template: Problem → Solution → Impact
+- [ ] Build template: Insight → Application → CTA
+- [ ] Build template: Story → Learning → Takeaway
+- [ ] Create 2-5 additional template variations
+- [ ] Test all templates with different audiences
+
+**Deliverable**: ✓ Audience-aware content generation
+
+---
+
+## Phase 3: Quality & Polish (Week 5)
+
+**Goal**: Improve output quality and user experience
+
+### Tasks (10 hours)
+
+#### Output Enhancement (4 hours)
+
+- [ ] Better hashtag selection
+- [ ] Emoji placement optimization
+- [ ] Hook strength improvement
+- [ ] CTA variations
+
+#### Batch Processing (3 hours)
+
+- [ ] Process multiple inputs at once
+- [ ] Queue system for content ideas
+- [ ] Save drafts for review
+
+#### UI Improvements (3 hours)
+
+- [ ] Better CLI prompts
+- [ ] Progress indicators
+- [ ] Preview before saving
+- [ ] Simple config file
+
+**Deliverable**: ✓ Production-ready generator with good UX
+
+---
+
+## Phase 4: URL Processing (Week 2)
 
 **Goal**: Extract and process web content
 
@@ -66,7 +127,7 @@ This is an AI-powered 小红书 (Xiaohongshu/RedNote) content generator designed
 
 ---
 
-## Phase 3: File Upload Support (Week 3)
+## Phase 5: File Upload Support (Week 3)
 
 **Goal**: Handle document inputs
 
@@ -93,68 +154,6 @@ This is an AI-powered 小红书 (Xiaohongshu/RedNote) content generator designed
 - [ ] Add file size limits
 
 **Deliverable**: ✓ Full multi-format input support (text, URL, files)
-
----
-
-## Phase 4: Audience Targeting & Tone (Week 4)
-
-**Goal**: Optimize for different professional audiences
-
-### Tasks (10 hours)
-
-#### Audience Profiles (3 hours)
-
-- [ ] Create CTOs/Engineering Directors profile
-- [ ] Create Hiring Managers profile
-- [ ] Create Software Engineers profile
-- [ ] Create Business Leaders profile
-
-#### Tone Adaptation (4 hours)
-
-- [ ] Adjust technical depth per audience
-- [ ] Emphasize different value props
-- [ ] A/B test different approaches
-- [ ] Create tone guidelines document
-
-#### Template Library (3 hours)
-
-- [ ] Build template: Problem â†’ Solution â†’ Impact
-- [ ] Build template: Insight â†’ Application â†’ CTA
-- [ ] Build template: Story â†’ Learning â†’ Takeaway
-- [ ] Create 2-5 additional template variations
-- [ ] Test all templates with different audiences
-
-**Deliverable**: ✓ Audience-aware content generation
-
----
-
-## Phase 5: Quality & Polish (Week 5)
-
-**Goal**: Improve output quality and user experience
-
-### Tasks (10 hours)
-
-#### Output Enhancement (4 hours)
-
-- [ ] Better hashtag selection
-- [ ] Emoji placement optimization
-- [ ] Hook strength improvement
-- [ ] CTA variations
-
-#### Batch Processing (3 hours)
-
-- [ ] Process multiple inputs at once
-- [ ] Queue system for content ideas
-- [ ] Save drafts for review
-
-#### UI Improvements (3 hours)
-
-- [ ] Better CLI prompts
-- [ ] Progress indicators
-- [ ] Preview before saving
-- [ ] Simple config file
-
-**Deliverable**: ✓ Production-ready generator with good UX
 
 ---
 
