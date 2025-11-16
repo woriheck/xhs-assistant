@@ -1,38 +1,35 @@
-"""Basic workflow: generator → critic → improve → end."""
+"""LangGraph workflow for 小紅書 content generation."""
 
 from langgraph.graph import StateGraph, END
-from ..state import WorkflowState
-from ..nodes import generator_node, critic_node, should_continue
+from .state import WorkflowState
+from .nodes import preanalyse_node, generator_node, critic_node, should_continue
 
 
-def create_basic_workflow():
+def get_workflow():
     """
-    Create the basic 小紅書 content generation workflow.
+    Create the 小紅書 content generation workflow.
 
     Flow:
-        START
-          ↓
-        generator (creates post)
-          ↓
-        should_continue?
-          ├─→ YES → critic (critiques with validation tool)
-          │           ↓
-          │         generator (improves post)
-          │           ↓ (loop)
-          └─→ NO → END
+      preanalyse → generator → (should_continue?)
+                          ├─ yes → critic → generator
+                          └─ no  → END
 
     Returns:
         Compiled LangGraph workflow
     """
-    # Create graph with state schema (modern pattern)
+    # Create graph with state schema
     workflow = StateGraph(WorkflowState)
 
     # Add nodes
+    workflow.add_node("preanalyse", preanalyse_node)
     workflow.add_node("generator", generator_node)
     workflow.add_node("critic", critic_node)
 
-    # Set entry point
-    workflow.set_entry_point("generator")
+    # Set entry point to preanalyse
+    workflow.set_entry_point("preanalyse")
+
+    # Add edge from preanalyse to generator
+    workflow.add_edge("preanalyse", "generator")
 
     # Add conditional edges from generator
     workflow.add_conditional_edges(

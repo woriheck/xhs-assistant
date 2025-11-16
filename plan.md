@@ -2,7 +2,9 @@
 
 ## Overview
 
-This is an AI-powered 小红书 (Xiaohongshu/RedNote) content generator designed to help build a professional personal brand. The system transforms technical content from various sources into engaging social media posts optimized for the Chinese professional networking platform.
+This is an AI-powered 小红书 (Xiaohongshu/RedNote) content generator designed to help build a professional personal brand. The system transforms technical content from various sources into engaging social media posts with authentic voice and strategic insights.
+
+**Primary Goal**: Get hired or land consulting gigs by building a strong technical leadership presence.
 
 ---
 
@@ -29,51 +31,61 @@ This is an AI-powered 小红书 (Xiaohongshu/RedNote) content generator designed
 
 - [x] Structure posts (hook, body, CTA) (Handled by prompts)
 - [x] Add character count optimization
-- [ ] Create 3 template variations
 
 **Deliverable**: ✓ CLI tool that takes text input and generates 小紅書 posts
 
 ---
 
-## Phase 2: Audience Targeting & Tone (Week 4)
+## Phase 2: Dynamic Audience Analysis & Custom Structure (Week 2)
 
-**Goal**: Optimize for different professional audiences
+**Goal**: Implement dynamic content analysis that generates custom structure for each post
 
-### Tasks (10 hours)
+**Strategy**: Analyze content to identify best audience and generate tailored structure on the fly
 
-#### Audience Profiles (3 hours)
+### Tasks (5 hours) - REFACTORED
 
-- [ ] Create CTOs/Engineering Directors profile
-- [ ] Create Hiring Managers profile
-- [ ] Create Software Engineers profile
-- [ ] Create Business Leaders profile
+#### Dynamic Analysis (2 hours)
 
-#### Tone Adaptation (4 hours)
+- [x] Remove fixed templates, implement ContentAnalysis model
+- [x] Create preanalyse phase that identifies target audience dynamically
+- [x] Generate custom post structure for each content piece
+- [x] Update prompts to avoid consultant-speak and emphasize authenticity
 
-- [ ] Adjust technical depth per audience
-- [ ] Emphasize different value props
-- [ ] A/B test different approaches
-- [ ] Create tone guidelines document
+#### Tone & Voice (2 hours)
 
-#### Template Library (3 hours)
+- [x] Refine GENERATOR_PROMPT for tech lead perspective
+- [x] Simplify CRITIC_PROMPT to avoid overfitting
+- [x] Add tone guidance generation per content
+- [ ] Test with diverse content types
 
-- [ ] Build template: Problem → Solution → Impact
-- [ ] Build template: Insight → Application → CTA
-- [ ] Build template: Story → Learning → Takeaway
-- [ ] Create 2-5 additional template variations
-- [ ] Test all templates with different audiences
+#### Testing & Refinement (1 hour)
 
-**Deliverable**: ✓ Audience-aware content generation
+- [ ] Generate 5-10 test posts with dynamic analysis
+- [ ] Validate audience targeting accuracy
+- [ ] Refine based on output quality
+
+**Deliverable**: ✓ Dynamic content generation with custom audience and structure per post
 
 ---
 
-## Phase 3: Quality & Polish (Week 5)
+## Phase 3: Quality & Polish (Week 3)
 
 **Goal**: Improve output quality and user experience
 
-### Tasks (10 hours)
+### Tasks (12 hours)
 
-#### Output Enhancement (4 hours)
+#### Conversation Threading (4 hours) - NEW
+
+- [ ] Add conversation state storage (in-memory or simple file-based)
+- [ ] Add session/thread ID to generator tool
+- [ ] Create continue_refinement tool to iterate on existing post
+- [ ] Allow user to send feedback: "make it more casual", "add examples", etc.
+- [ ] Maintain conversation context across refinement cycles
+- [ ] Test multi-turn refinement workflow
+
+**Use case**: User generates post → not satisfied → sends refinement request → gets improved version
+
+#### Output Enhancement (3 hours)
 
 - [ ] Better hashtag selection
 - [ ] Emoji placement optimization
@@ -86,18 +98,18 @@ This is an AI-powered 小红书 (Xiaohongshu/RedNote) content generator designed
 - [ ] Queue system for content ideas
 - [ ] Save drafts for review
 
-#### UI Improvements (3 hours)
+#### UI Improvements (2 hours)
 
 - [ ] Better CLI prompts
 - [ ] Progress indicators
 - [ ] Preview before saving
 - [ ] Simple config file
 
-**Deliverable**: ✓ Production-ready generator with good UX
+**Deliverable**: ✓ Production-ready generator with threading/refinement support and good UX
 
 ---
 
-## Phase 4: URL Processing (Week 2)
+## Phase 4: URL Processing (Week 4)
 
 **Goal**: Extract and process web content
 
@@ -127,7 +139,7 @@ This is an AI-powered 小红书 (Xiaohongshu/RedNote) content generator designed
 
 ---
 
-## Phase 5: File Upload Support (Week 3)
+## Phase 5: File Upload Support (Week 5)
 
 **Goal**: Handle document inputs
 
@@ -206,14 +218,14 @@ This is an AI-powered 小红书 (Xiaohongshu/RedNote) content generator designed
 
 ## Success Metrics by Phase
 
-| Phase | Key Metric                             |
-| ----- | -------------------------------------- |
-| 1     | Generate 10 quality posts from text    |
-| 2     | Process 20 different URLs successfully |
-| 3     | Handle 5+ document types               |
-| 4     | 4 distinct audience variations         |
-| 5     | <30 seconds per post generation        |
-| 6     | Content calendar with 30 days planned  |
+| Phase | Key Metric                                       |
+| ----- | ------------------------------------------------ |
+| 1     | Generate 10 quality posts from text              |
+| 2     | Dynamic audience detection working for 10+ posts |
+| 3     | <30 seconds per post generation                  |
+| 4     | Process 20 different URLs successfully           |
+| 5     | Handle 5+ document types                         |
+| 6     | Content calendar with 30 days planned            |
 
 ---
 
@@ -241,13 +253,16 @@ Each phase has ~1-2 hours of buffer.
 You'll have a working system to:
 
 - [ ] Generate posts from any input format
-- [ ] Target different professional audiences
+- [ ] Create authentic content with dynamic audience targeting
 - [ ] Maintain consistent posting schedule
 - [ ] Track what works
-- [ ] Build your personal brand
+- [ ] Build your personal brand as a technical leader
+
+**Goal**: Get hired or land consulting gigs through authentic content and strategic presence
 
 **Next steps**:
 
-- [ ] Start posting daily
-- [ ] Gather feedback
-- [ ] Iterate based on engagement data
+- [ ] Start posting daily on 小紅書
+- [ ] Engage with your target audience
+- [ ] Track engagement and refine strategy
+- [ ] Convert connections into opportunities

@@ -1,5 +1,6 @@
 """Main content generation tool with multi-agent workflow."""
 
+import sys
 from langchain_core.messages import SystemMessage, HumanMessage
 from ..agents import get_workflow
 from ..agents.state import XHSPost
@@ -33,9 +34,13 @@ async def generate_xhs_post(input_data: dict) -> dict:
         full_content = f"{content}\n\nAdditional context: {context}"
 
     # Get the LangGraph workflow
-    workflow = get_workflow("basic")
+    print(f"🚀 Starting workflow with {iterations} iterations", file=sys.stderr, flush=True)
+    workflow = get_workflow()
 
     # Initialize message chain
+    # SystemMessage: Base instructions for authentic content creation
+    # HumanMessage: Content to transform
+    # (Custom structure will be added by preanalyse_node as HumanMessage)
     messages = [
         SystemMessage(content=GENERATOR_PROMPT),
         HumanMessage(content=f"Please generate a 小紅書 post from the following content:\n\n{full_content}"),
@@ -52,8 +57,19 @@ async def generate_xhs_post(input_data: dict) -> dict:
     # Run the workflow
     final_state = await workflow.ainvoke(initial_state)
 
+    # Show conversation messages
+    print("\n--- Conversation Flow ---", file=sys.stderr, flush=True)
+    messages = final_state.get("messages", [])
+    for i, msg in enumerate(messages, 1):
+        msg_type = type(msg).__name__
+        print(f"\n{i}. {msg_type}:", file=sys.stderr, flush=True)
+        print(msg.content, file=sys.stderr, flush=True)
+    print("\n--- End ---\n", file=sys.stderr, flush=True)
+
     # Combine title and body for final post
     final_post = f"{final_state['post'].title}\n\n{final_state['post'].body}"
+
+    print(f"✅ Complete - Generated post ({len(final_post)} chars)", file=sys.stderr, flush=True)
 
     # Return only the final post
     return {

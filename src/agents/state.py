@@ -10,7 +10,7 @@ class XHSPost(BaseModel):
     body: str = Field(description="Post body content (max 10,000 characters)")
 
 class WorkflowState(TypedDict):
-    """State for the basic generator → critic workflow.
+    """State for the preanalyse → generator → critic workflow.
 
     Uses TypedDict with Annotated reducers for proper state management.
     """
