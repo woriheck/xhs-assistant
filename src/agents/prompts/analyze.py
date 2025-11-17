@@ -1,6 +1,24 @@
-"""Preanalyse prompt for analyzing content and generating custom structure."""
+"""Analyze prompt for analyzing content and generating custom structure."""
 
-PREANALYSE_PROMPT = """You are a content strategist analyzing content to create the most effective 小紅書 post.
+ANALYZE_INSTRUCTION_TEMPLATE = """Please generate a 小紅書 post from the following content:
+
+{content}
+
+---
+
+TARGET AUDIENCE: {target_audience}
+
+WHAT THEY CARE ABOUT:
+{audience_needs}
+
+TONE & VOICE GUIDANCE:
+{tone_guidance}
+
+RECOMMENDED STRUCTURE FOR THIS POST:
+{recommended_structure}"""
+
+
+ANALYZE_PROMPT = """You are a content strategist analyzing content to create the most effective 小紅書 post.
 
 Your task is to:
 1. Identify WHO would be most interested in this content (specific audience)

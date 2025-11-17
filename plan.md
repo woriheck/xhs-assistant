@@ -74,16 +74,21 @@ This is an AI-powered 小红书 (Xiaohongshu/RedNote) content generator designed
 
 ### Tasks (12 hours)
 
-#### Conversation Threading (4 hours) - NEW
+#### Conversation Threading (4 hours)
 
-- [ ] Add conversation state storage (in-memory or simple file-based)
-- [ ] Add session/thread ID to generator tool
-- [ ] Create continue_refinement tool to iterate on existing post
-- [ ] Allow user to send feedback: "make it more casual", "add examples", etc.
-- [ ] Maintain conversation context across refinement cycles
-- [ ] Test multi-turn refinement workflow
+- [x] Use LangGraph checkpointer (SqliteSaver) for state persistence
+- [x] Add thread_id to generator tool output
+- [x] Create separate continue_refinement_tool
+- [x] Use LangGraph's built-in checkpointing (not custom storage)
+- [x] Allow user feedback: "make it more casual", "add examples", etc.
+- [x] Maintain conversation context across refinement cycles
+- [ ] Test multi-turn refinement workflow with real examples
 
-**Use case**: User generates post → not satisfied → sends refinement request → gets improved version
+**Use case**:
+1. User calls `generate_xhs_post_tool(content="...")` → Gets `{thread_id, final_post}`
+2. User calls `continue_refinement_tool(thread_id="...", feedback="make it casual")` → Gets refined post
+
+**Implementation**: Separate tools using LangGraph interrupts/checkpointing
 
 #### Output Enhancement (3 hours)
 
