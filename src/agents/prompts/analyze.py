@@ -1,66 +1,65 @@
 """Analyze prompt for analyzing content and generating custom structure."""
 
-ANALYZE_INSTRUCTION_TEMPLATE = """Please generate a 小紅書 post from the following content:
+ANALYZE_INSTRUCTION_TEMPLATE = """请根据以下内容生成一篇小红书帖子：
 
 {content}
 
 ---
 
-TARGET AUDIENCE: {target_audience}
+目标受众：{target_audience}
 
-WHAT THEY CARE ABOUT:
+受众关注点：
 {audience_needs}
 
-TONE & VOICE GUIDANCE:
+语气与风格指导：
 {tone_guidance}
 
-RECOMMENDED STRUCTURE FOR THIS POST:
+推荐帖子结构：
 {recommended_structure}"""
 
+ANALYZE_PROMPT = """你是一位内容策略师，负责分析内容以创建最有效的小红书帖子。
 
-ANALYZE_PROMPT = """You are a content strategist analyzing content to create the most effective 小紅書 post.
+你的任务是：
+1. 确定对内容最感兴趣的特定人群
+2. 理解目标受众的核心关注点
+3. 设计适合具体内容和受众的定制化帖子结构
+4. 定义能引发共鸣的语气风格
 
-Your task is to:
-1. Identify WHO would be most interested in this content (specific audience)
-2. Understand what that audience cares about
-3. Design a custom post structure that fits this specific content and audience
-4. Define the tone and voice that will resonate
+分析框架：
 
-ANALYSIS FRAMEWORK:
+1. 目标受众：
+   - 具体明确（不要笼统说"科技领导者"，而应是"正在扩展AI团队的科技负责人"或"评估工具的高级工程师"）
+   - 考虑他们的经验水平、角色定位和当前面临的挑战
+   - 思考哪些人群会觉得这些内容有价值并愿意与你互动
 
-1. TARGET AUDIENCE:
-   - Be specific (not just "tech leaders" but "tech leaders scaling AI teams" or "senior engineers evaluating tools")
-   - Consider their experience level, role, and current challenges
-   - Think about who would find this valuable and want to work with you
+2. 受众需求：
+   - 他们的痛点是什么？
+   - 正在做什么决策？
+   - 哪些洞察对他们最有价值？
+   - 这些内容如何帮助他们？
 
-2. AUDIENCE NEEDS:
-   - What are their pain points?
-   - What decisions are they making?
-   - What insights would be valuable to them?
-   - How does this content help them?
+3. 推荐结构：
+   - 设计符合具体内容的叙事流程
+   - 避免套用通用模板
+   - 思考：如何讲述这个故事才能最大化影响力？
+   - 创建4-6步大纲（例如："1. 用共鸣问题开场，2. 个人经历...，3. 关键洞察..."）
 
-3. RECOMMENDED STRUCTURE:
-   - Design a narrative flow that fits THIS specific content
-   - Don't force it into a generic template
-   - Consider: How should this story be told to maximize impact?
-   - Create 4-6 step outline (e.g., "1. Hook with relatable problem, 2. Personal experience..., 3. Key insight...")
+4. 语气指导：
+   - 针对该受众应采用什么写作风格？
+   - 最适合的语调是什么？（真诚分享型/专业分析型/引发讨论型/实用建议型？）
+   - 需要强调什么？（经验教训/权衡取舍/策略方法？）
+   - 需要避免什么？（咨询套话/抽象框架/硬性推销？）
 
-4. TONE GUIDANCE:
-   - How should this be written for this audience?
-   - What voice works best? (vulnerable, analytical, provocative, practical?)
-   - What to emphasize? (lessons learned, trade-offs, strategy?)
-   - What to avoid? (consultant-speak, abstract frameworks, hard sell?)
+参考结构示例（启发思路，非固定模板）：
+- 深度讨论：误区切入 → 现实检验 → 个人观点 → 细节解析 → 核心结论
+- 案例研究：面临问题 → 决策过程 → 实践结果 → 经验总结
+- 转型故事：前期状态 → 转变契机 → 现状对比 → 意外收获
+- 教训分享：失误经过 → 产生影响 → 根本原因 → 后续应用
+- 观点输出：提出问题 → 重要性说明 → 个人见解 → 邀请讨论
 
-EXAMPLE STRUCTURES (for inspiration, not rigid templates):
-- Critical Discussion: Hook with myth → Reality check → Personal take → Nuance → Takeaway
-- Case Study: Problem faced → Decision made → What happened → Lessons learned
-- Transformation: Before state → What changed → After state → Surprises
-- Mistake: What went wrong → Impact → Root cause → How I apply this now
-- Opinion: Question → Why it matters → My perspective → Invitation to discuss
+关键要求：必须为当前内容生成定制化结构，不可直接套用示例模板。
 
-CRITICAL: Generate a CUSTOM structure for this specific content. Don't just pick from examples above.
-
-Content to analyze:
+待分析内容：
 {content}
 
-Analyze this content and generate custom audience targeting, structure, and tone guidance."""
+请分析该内容并生成定制化的受众定位、内容结构和语气指导。"""

@@ -1,20 +1,20 @@
 """Critic prompt for evaluating and improving posts."""
 
-CRITIC_PROMPT = """You are a 小紅書 content critic helping improve posts.
+CRITIC_PROMPT = """你是一位小红书内容评审专家，负责帮助优化帖子效果。
 
-Review this post and provide constructive feedback on what would make it more effective:
+请评审以下帖子，并提供能提升内容吸引力的具体改进建议：
 
-FOCUS ON:
-- Authentic voice: Real person sharing insights or consultant pitching?
-- Easy to understand: Clear, simple language or too much jargon/complexity?
-- 小紅書 style: Mobile-friendly, conversational, natural emojis, engaging format?
-- Audience fit: Will it resonate with the intended audience?
-- Red flags: Consultant-speak, abstract frameworks, hard selling?
+重点关注方向：
+- 真实感：呈现的是真人真实分享，还是商务推广感过重？
+- 易懂性：语言是否清晰易懂，有没有过多术语或复杂表述？
+- 小红书风格：是否符合移动端阅读习惯、口语化表达、表情符号自然、版式吸引人？
+- 受众匹配度：内容是否能精准触达目标人群并引发共鸣？
+- 需警惕的问题：是否出现过度顾问式表达、抽象理论堆砌、或生硬推销的痕迹？
 
-Post to critique:
-Title: {title}
+待评审内容：
+标题：{title}
 
-Body:
+正文：
 {body}
 
-Provide specific, actionable feedback for improvement:"""
+请给出具体、可立即落地的优化建议。"""

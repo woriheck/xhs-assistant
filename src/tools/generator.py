@@ -1,11 +1,15 @@
 """Main content generation tool with multi-agent workflow."""
 
-import sys
+import logging
 import uuid
 from langchain_core.messages import SystemMessage, HumanMessage
 from ..agents import get_workflow
 from ..agents.state import XHSPost
 from ..agents.prompts import GENERATOR_PROMPT
+from ..utils import log_conversation_flow
+
+# Configure logger
+logger = logging.getLogger(__name__)
 
 
 async def generate_xhs_post(input_data: dict) -> dict:
@@ -32,7 +36,7 @@ async def generate_xhs_post(input_data: dict) -> dict:
     thread_id = str(uuid.uuid4())
 
     # Get the LangGraph workflow with checkpointer
-    print(f"🚀 Starting new conversation {thread_id}", file=sys.stderr, flush=True)
+    logger.info(f"🚀 Starting new conversation {thread_id}")
     workflow = get_workflow()
 
     # Initialize message chain with only SystemMessage
@@ -54,20 +58,11 @@ async def generate_xhs_post(input_data: dict) -> dict:
     config = {"configurable": {"thread_id": thread_id}}
     final_state = await workflow.ainvoke(initial_state, config)
 
-    # Show conversation messages
-    print("\n--- Conversation Flow ---", file=sys.stderr, flush=True)
-    messages = final_state.get("messages", [])
-    for i, msg in enumerate(messages, 1):
-        msg_type = type(msg).__name__
-        print(f"\n{i}. {msg_type}:", file=sys.stderr, flush=True)
-        print(msg.content, file=sys.stderr, flush=True)
-    print("\n--- End ---\n", file=sys.stderr, flush=True)
+    # Log conversation flow (only in debug mode)
+    log_conversation_flow(final_state.get("messages", []))
 
     # Combine title and body for final post
     final_post = f"{final_state['post'].title}\n\n{final_state['post'].body}"
-
-    print(f"✅ Complete - Generated post ({len(final_post)} chars)", file=sys.stderr, flush=True)
-    print(f"💾 Thread ID: {thread_id}", file=sys.stderr, flush=True)
 
     # Return thread_id and final post
     return {
@@ -98,7 +93,7 @@ async def refinement_xhs_post(input_data: dict) -> dict:
     if not thread_id:
         raise ValueError("thread_id is required for continuation")
 
-    print(f"🔄 Continuing conversation {thread_id[:8]}...", file=sys.stderr, flush=True)
+    logger.info(f"🔄 Continuing conversation {thread_id}")
 
     # Get workflow
     workflow = get_workflow()
@@ -121,19 +116,11 @@ async def refinement_xhs_post(input_data: dict) -> dict:
     # Continue workflow from checkpoint
     final_state = await workflow.ainvoke(update_state, config)
 
-    # Show conversation messages
-    print("\n--- Conversation Flow ---", file=sys.stderr, flush=True)
-    messages = final_state.get("messages", [])
-    for i, msg in enumerate(messages, 1):
-        msg_type = type(msg).__name__
-        print(f"\n{i}. {msg_type}:", file=sys.stderr, flush=True)
-        print(msg.content, file=sys.stderr, flush=True)
-    print("\n--- End ---\n", file=sys.stderr, flush=True)
+    # Log conversation flow (only in debug mode)
+    log_conversation_flow(final_state.get("messages", []), "Refinement Flow")
 
     # Combine title and body for final post
     final_post = f"{final_state['post'].title}\n\n{final_state['post'].body}"
-
-    print(f"✅ Refinement complete - Generated post ({len(final_post)} chars)", file=sys.stderr, flush=True)
 
     return {
         "thread_id": thread_id,

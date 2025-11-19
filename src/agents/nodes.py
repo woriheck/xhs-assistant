@@ -1,6 +1,6 @@
 """Reusable node functions for LangGraph workflows."""
 
-import sys
+import logging
 from typing import Literal
 from pydantic import BaseModel, Field
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
@@ -8,6 +8,9 @@ from ..utils.llm import base_llm
 from .validators.xhs_post_validators import validate_post, format_validation_feedback
 from .state import XHSPost
 from .prompts import CRITIC_PROMPT, ANALYZE_PROMPT, ANALYZE_INSTRUCTION_TEMPLATE, FORMATTING_PROMPT
+
+# Configure logger
+logger = logging.getLogger(__name__)
 
 
 class ContentAnalysis(BaseModel):
@@ -157,19 +160,6 @@ async def formatting_node(state: dict) -> dict:
     # Use structured output to get formatted post
     structured_llm = base_llm.with_structured_output(XHSPost)
     formatted_post: XHSPost = await structured_llm.ainvoke(prompt)
-
-    # Log formatting results
-    new_title_length = len(formatted_post.title)
-    new_body_length = len(formatted_post.body)
-
-    if title_length != new_title_length:
-        print(f"📝 Title adjusted: {title_length} → {new_title_length} chars", file=sys.stderr, flush=True)
-
-    if body_length != new_body_length:
-        print(f"📝 Body adjusted: {body_length} → {new_body_length} chars", file=sys.stderr, flush=True)
-
-    if title_length == new_title_length and body_length == new_body_length:
-        print(f"✅ Formatting optimized (no length changes needed)", file=sys.stderr, flush=True)
 
     return {
         "post": formatted_post,

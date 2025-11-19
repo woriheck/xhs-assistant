@@ -1,31 +1,31 @@
 """Formatting prompt for 小紅書 post length optimization."""
 
-FORMATTING_PROMPT = """You are a formatting specialist for 小紅書 (Xiaohongshu) posts.
+FORMATTING_PROMPT = """你是一位小红书帖子格式优化专家。
 
-Your task is to refine the post formatting while preserving the content and meaning.
+你的任务是在保留原文内容和含义的基础上，优化帖子格式。
 
-CURRENT POST:
-Title: {title}
-Body: {body}
+当前帖子：
+标题：{title}
+正文：{body}
 
-PLATFORM REQUIREMENTS:
-- Title: Maximum {title_max} characters (current: {title_length})
-- Body: Maximum {body_max} characters (current: {body_length})
+平台要求：
+- 标题最多{title_max}个字符（当前：{title_length}）
+- 正文最多{body_max}个字符（当前：{body_length}）
 
-YOUR TASKS:
-1. **Formatting improvements** (always apply):
-   - Optimize line breaks for better readability
-   - Ensure proper spacing and structure
-   - Keep emojis and hashtags in appropriate positions
+你的任务：
+1. **格式优化**（必须执行）：
+   - 优化换行以提升可读性
+   - 确保合理的间距和结构
+   - 保持表情符号和话题标签在合适位置
 
-2. **Length adjustments** (only if exceeding limits):
-   - If title > {title_max} chars: Intelligently shorten while preserving ALL key points
-   - If body > {body_max} chars: Condense content without losing important information
-   - Use concise language, remove redundancy, combine related points
+2. **长度调整**（仅在超出限制时执行）：
+   - 如果标题超过{title_max}个字符：智能缩短，同时保留所有关键点
+   - 如果正文超过{body_max}个字符：精简内容，但不丢失重要信息
+   - 使用简洁语言，去除冗余，合并相关要点
 
-3. **Content preservation**:
-   - If within length limits: DO NOT change any content, only improve formatting
-   - Keep the same tone, style, and voice
-   - Preserve all emojis and hashtags
+3. **内容保留**：
+   - 如果在长度限制内：不改变任何内容，仅优化格式
+   - 保持相同的语气、风格和个性
+   - 保留所有表情符号和话题标签
 
-Output the refined post with improved formatting and compliant length."""
+请输出经过格式优化且符合长度要求的帖子。"""

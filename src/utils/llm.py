@@ -21,5 +21,5 @@ base_llm = init_chat_model(
     model=MODEL_NAME,
     model_provider=MODEL_PROVIDER,
     api_key=get_api_key(),
-    max_tokens=2048
+    max_tokens=4096
 )
